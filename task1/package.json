@@ -10,7 +10,5 @@
   "author": "",
   "license": "ISC",
   "type": "module",
-  "dependencies": {
-    "directory-tree": "^3.3.0"
-  }
+  "dependencies": {}
 }
