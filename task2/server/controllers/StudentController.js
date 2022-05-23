@@ -39,7 +39,7 @@ class StudentController {
     async getOneStudent(req, res) {
         try {
             const id = req.params.id;
-            const student = await db.query("SELECT * FROM student WHERE id = $1", [id]);
+            const student = await db.query("SELECT student.id,birthday,firstname,lastname,patronymic,name AS groupName FROM student JOIN studyGroup ON student.groupId = studyGroup.id WHERE student.id = $1", [id]);
             res.json(student.rows[0]);
         } catch (e) {
             res.status(300).send({message: e.message});

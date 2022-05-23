@@ -3,9 +3,12 @@ import {useEffect, useMemo, useState} from "react";
 import {Button, Container, Spinner, Table} from "react-bootstrap";
 import StudentForm from "./components/StudentForm";
 import {dateFormat} from "./utils/dateFormat";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 import {ToastContainer, toast} from 'react-toastify';
+import StudentList from "./components/StudentList";
 
 function App() {
     const [students, setStudents] = useState([]);
@@ -42,7 +45,7 @@ function App() {
             ];
             setStudents(newStudents);
             resetForm();
-            toast.success('student was added');
+            toast.success(`student was added`);
         } catch (e) {
             toast.error(e.response.data.message || e.message);
         } finally {
@@ -83,44 +86,10 @@ function App() {
             <h2>Add student form</h2>
             <StudentForm onSubmit={onCreateUser}/>
             <h2>All students</h2>
-            <Table
-                striped
-                bordered
-                hover
-            >
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Patronymic</th>
-                    <th>Birthday</th>
-                    <th>group</th>
-                </tr>
-                </thead>
-                <tbody>
-                {
-                    reversedStudents.map((student, i) => {
-                        return <tr key={i}>
-                            <td>{student.id}</td>
-                            <td>{student.firtsname}</td>
-                            <td>{student.lastname}</td>
-                            <td>{student.patronymic || "none"}</td>
-                            <td>{dateFormat(student.birthday)}</td>
-                            <td>{student.groupname}</td>
-                            <td>
-                                <Button
-                                    onClick={() => onDelete(student.id)}
-                                    variant="danger"
-                                >
-                                    delete
-                                </Button>
-                            </td>
-                        </tr>
-                    })
-                }
-                </tbody>
-            </Table>
+            <StudentList
+                items={reversedStudents}
+                onDelete={onDelete}
+            />
             <ToastContainer
                 position="top-right"
                 autoClose={3000}
