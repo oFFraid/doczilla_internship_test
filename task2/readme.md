@@ -33,4 +33,4 @@
 
 # Запуск
 
-в корне проекта выполнить команды <code>npm i</code> <code> npm run dev</code> 
+в корне проекта выполнить команды <code>npm i</code> <code>cd ./client npm i</code> <code>cd ./server npm i</code> <code> npm run dev</code> 
